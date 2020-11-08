@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import amber from "@material-ui/core/colors/amber";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import imdbAPI from "./api";
+import { theme } from "./theme";
 
 import MoviePage from "./pages/movie";
 import HomePage from "./pages/home";
-import imdbAPI from "./api";
 
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: amber,
-  },
-});
+import AppBar from "./components/appbar";
 
 function App() {
   useEffect(() => {
@@ -23,17 +20,21 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/movie/:movieSlug" exact>
-            <MoviePage />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </BrowserRouter>
+      <CssBaseline>
+        <BrowserRouter>
+          <AppBar />
+
+          <Switch>
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+            <Route path="/movie/:movieSlug" exact>
+              <MoviePage />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </BrowserRouter>
+      </CssBaseline>
     </ThemeProvider>
   );
 }
