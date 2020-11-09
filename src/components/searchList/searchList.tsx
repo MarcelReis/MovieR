@@ -73,38 +73,7 @@ function SearchList(props: PropsType) {
   }, []);
 
   if (loading) {
-    return (
-      <Paper className={classes.root} elevation={0}>
-        <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Skeleton variant="circle" width={40} height={40} />
-            </ListItemAvatar>
-            <ListItemText>
-              <Skeleton variant="text" />
-            </ListItemText>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Skeleton variant="circle" width={40} height={40} />
-            </ListItemAvatar>
-            <ListItemText>
-              <Skeleton variant="text" />
-            </ListItemText>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Skeleton variant="circle" width={40} height={40} />
-            </ListItemAvatar>
-            <ListItemText>
-              <Skeleton variant="text" />
-            </ListItemText>
-          </ListItem>
-        </List>
-      </Paper>
-    );
+    return <LoadingState className={classes.root} />;
   }
 
   return results ? (
@@ -131,5 +100,38 @@ function SearchList(props: PropsType) {
     </Paper>
   ) : null;
 }
+
+const LoadingState = (props: any) => (
+  <Paper className={props.className} elevation={0}>
+    <List>
+      <ListItem>
+        <ListItemAvatar>
+          <Skeleton variant="circle" width={40} height={40} />
+        </ListItemAvatar>
+        <ListItemText>
+          <Skeleton variant="text" />
+        </ListItemText>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem>
+        <ListItemAvatar>
+          <Skeleton variant="circle" width={40} height={40} />
+        </ListItemAvatar>
+        <ListItemText>
+          <Skeleton variant="text" />
+        </ListItemText>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem>
+        <ListItemAvatar>
+          <Skeleton variant="circle" width={40} height={40} />
+        </ListItemAvatar>
+        <ListItemText>
+          <Skeleton variant="text" />
+        </ListItemText>
+      </ListItem>
+    </List>
+  </Paper>
+);
 
 export default SearchList;
