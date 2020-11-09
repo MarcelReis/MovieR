@@ -16,6 +16,7 @@ import SearchList from "../searchList";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: theme.spacing(2),
   },
   searchInput: {
     flexGrow: 1,
