@@ -17,6 +17,8 @@ import imdbAPI from "../../api";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "1rem",
+    height: "fit-content",
+    width: "100%",
   },
   ratingTitle: {
     marginBottom: "0.25rem",
@@ -24,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   rating: {
     display: "flex",
     justifyContent: "space-around",
+  },
+  rated: {
+    width: "100%",
+    height: "fit-content",
   },
   submit: {
     flexGrow: 1,
@@ -92,7 +98,7 @@ function ReviewMovie(props: PropsType) {
 
   if (submited) {
     return (
-      <Paper>
+      <Paper className={classes.rated}>
         <Box padding={2}>
           <Typography>You already rated this show</Typography>
         </Box>
@@ -102,16 +108,18 @@ function ReviewMovie(props: PropsType) {
 
   if (!submited && !props.isOpen) {
     return (
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        fullWidth
-        startIcon={<CreateIcon />}
-        onClick={props.toggle}
-      >
-        <Box flexGrow={1}>Write a review</Box>
-      </Button>
+      <Box width="100%">
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          fullWidth
+          startIcon={<CreateIcon />}
+          onClick={props.toggle}
+        >
+          <Box flexGrow={1}>Write a review</Box>
+        </Button>
+      </Box>
     );
   }
 

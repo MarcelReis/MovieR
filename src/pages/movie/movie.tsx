@@ -93,6 +93,7 @@ const MoviePage = () => {
           </Box>
         </Box>
       </Box>
+
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <img src={movie.poster} width="100%" alt="" />
@@ -104,67 +105,71 @@ const MoviePage = () => {
         </Grid>
       </Grid>
 
-      <Box paddingY="2rem">
-        {movie.cast.length > 0 ? (
-          <Accordion className={classes.accordion}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="cast-content"
-              id="cast-header"
-            >
-              <Typography>Cast</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <List>
-                {movie.cast.map((star, index) => (
-                  <React.Fragment key={star.actor_id}>
-                    <ListItem>
-                      <ListItemText
-                        primary={`${star.actor} - ${star.character}`}
-                      />
-                    </ListItem>
-                    {index === movie.cast.length - 1 ? null : (
-                      <Divider component="li" />
-                    )}
-                  </React.Fragment>
-                ))}
-              </List>
-            </AccordionDetails>
-          </Accordion>
-        ) : null}
+      <Grid container spacing={3}>
+        <Grid item sm={12} md={6}>
+          {movie.cast.length > 0 ? (
+            <Accordion className={classes.accordion}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="cast-content"
+                id="cast-header"
+              >
+                <Typography>Cast</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <List>
+                  {movie.cast.map((star, index) => (
+                    <React.Fragment key={star.actor_id}>
+                      <ListItem>
+                        <ListItemText
+                          primary={`${star.actor} - ${star.character}`}
+                        />
+                      </ListItem>
+                      {index === movie.cast.length - 1 ? null : (
+                        <Divider component="li" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ) : null}
 
-        {movie.technical_specs.length > 0 ? (
-          <Accordion className={classes.accordion}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="cast-content"
-              id="cast-header"
-            >
-              <Typography>Technical Specifications</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <List>
-                {movie.technical_specs.map((spec, index) => (
-                  <React.Fragment key={index}>
-                    <ListItem>
-                      <ListItemText primary={spec.join(" - ")} />
-                    </ListItem>
-                    {index === movie.technical_specs.length - 1 ? null : (
-                      <Divider component="li" />
-                    )}
-                  </React.Fragment>
-                ))}
-              </List>
-            </AccordionDetails>
-          </Accordion>
-        ) : null}
-      </Box>
+          {movie.technical_specs.length > 0 ? (
+            <Accordion className={classes.accordion}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="cast-content"
+                id="cast-header"
+              >
+                <Typography>Technical Specifications</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <List>
+                  {movie.technical_specs.map((spec, index) => (
+                    <React.Fragment key={index}>
+                      <ListItem>
+                        <ListItemText primary={spec.join(" - ")} />
+                      </ListItem>
+                      {index === movie.technical_specs.length - 1 ? null : (
+                        <Divider component="li" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ) : null}
+        </Grid>
 
-      <ReviewMovie
-        movie={movie}
-        isOpen={openReview}
-        toggle={() => setOpenReview((s) => !s)}
-      />
+        <Grid container item sm={12} md={6}>
+          <ReviewMovie
+            movie={movie}
+            isOpen={openReview}
+            toggle={() => setOpenReview((s) => !s)}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };
