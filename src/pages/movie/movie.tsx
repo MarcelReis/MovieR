@@ -7,6 +7,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Divider from "@material-ui/core/Divider";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
@@ -15,11 +16,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 
-import CreateIcon from "@material-ui/icons/Create";
 import StarIcon from "@material-ui/icons/Star";
 
 import imdbAPI from "../../api";
 import { Movie } from "../../api/types";
+import ReviewMovie from "../../components/reviewMovie";
 
 const useStyles = makeStyles((theme) => ({
   accordion: {
@@ -28,9 +29,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MoviePage = () => {
+  const { movieSlug } = useParams<{ movieSlug: string }>();
   const [movie, setMovie] = useState<Movie | null>();
   const [loading, setLoading] = useState(false);
-  const { movieSlug } = useParams<{ movieSlug: string }>();
+  const [openReview, setOpenReview] = useState(false);
 
   const classes = useStyles();
 
@@ -46,9 +48,9 @@ const MoviePage = () => {
 
   if (loading) {
     return (
-      <Typography variant="h6" component="h1">
-        Loading...
-      </Typography>
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="25%" />
+      </Box>
     );
   }
 
@@ -59,8 +61,6 @@ const MoviePage = () => {
       </Typography>
     );
   }
-
-  console.log("movie :>> ", movie);
 
   return (
     <div>
@@ -160,15 +160,11 @@ const MoviePage = () => {
         ) : null}
       </Box>
 
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        fullWidth
-        startIcon={<CreateIcon />}
-      >
-        <Box flexGrow={1}>Write a review</Box>
-      </Button>
+      <ReviewMovie
+        movie={movie}
+        isOpen={openReview}
+        toggle={() => setOpenReview((s) => !s)}
+      />
     </div>
   );
 };

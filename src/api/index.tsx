@@ -36,6 +36,16 @@ class IMDB_API {
       return null;
     }
   }
+
+  public async sendRating(_: any): Promise<boolean> {
+    await new Promise((res) => {
+      setTimeout(() => {
+        res();
+      }, 1000);
+    });
+
+    return true;
+  }
 }
 
 const imdbAPI = new IMDB_API();
