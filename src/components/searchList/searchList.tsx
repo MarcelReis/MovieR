@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import debounce from "@material-ui/core/utils/debounce";
+
+import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import Paper from "@material-ui/core/Paper";
 
 import imdbAPI from "../../api";
 import { BasicInfoResult } from "../../api/types";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import { Link as RouterLink } from "react-router-dom";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,11 @@ function SearchList(props: PropsType) {
   const classes = useStyles();
 
   useEffect(() => {
-    debounceSearch(props.searchString, setResults);
+    if (props.searchString === "") {
+      debounceSearch.clear();
+    } else {
+      debounceSearch(props.searchString, setResults);
+    }
   }, [props.searchString]);
 
   useEffect(() => {
@@ -67,7 +72,7 @@ function SearchList(props: PropsType) {
             <ListItem
               color="primary"
               component={RouterLink}
-              to={`movie/${encodeURI(movie.id)}`}
+              to={`/movie/${encodeURI(movie.id)}`}
             >
               <ListItemAvatar>
                 <Avatar className={classes.avatar} alt="" src={movie.image} />

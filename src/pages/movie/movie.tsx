@@ -29,16 +29,35 @@ const useStyles = makeStyles((theme) => ({
 
 const MoviePage = () => {
   const [movie, setMovie] = useState<Movie | null>();
+  const [loading, setLoading] = useState(false);
   const { movieSlug } = useParams<{ movieSlug: string }>();
 
   const classes = useStyles();
 
   useEffect(() => {
-    imdbAPI.getMovie(movieSlug).then((movie) => setMovie(movie));
+    setLoading(true);
+    imdbAPI
+      .getMovie(movieSlug)
+      .then((movie) => {
+        setMovie(movie);
+      })
+      .finally(() => setLoading(false));
   }, [movieSlug]);
 
-  if (!movie) {
-    return null;
+  if (loading) {
+    return (
+      <Typography variant="h6" component="h1">
+        Loading...
+      </Typography>
+    );
+  }
+
+  if (!movie || !movie.title) {
+    return (
+      <Typography variant="h6" component="h1">
+        Error
+      </Typography>
+    );
   }
 
   console.log("movie :>> ", movie);
