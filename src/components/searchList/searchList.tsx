@@ -55,6 +55,7 @@ function SearchList(props: PropsType) {
   useEffect(() => {
     if (props.searchString === "") {
       debounceSearch.clear();
+      setResults(null);
     } else {
       debounceSearch(props.searchString, setResults);
     }
