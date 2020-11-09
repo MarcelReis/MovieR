@@ -48,7 +48,7 @@ function AppBar() {
   }, [location.pathname]);
 
   return (
-    <div className={classes.root}>
+    <Toolbar className={classes.root}>
       <BaseAppBar position="fixed">
         <Toolbar>
           {searchOpen ? (
@@ -100,7 +100,7 @@ function AppBar() {
         </Toolbar>
         <SearchList open={searchOpen} searchString={searchValue} />
       </BaseAppBar>
-    </div>
+    </Toolbar>
   );
 }
 
