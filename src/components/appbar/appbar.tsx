@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -46,10 +46,14 @@ function AppBar() {
 
   const location = useLocation();
 
-  useEffect(() => {
+  const closeSearchHandler = useCallback(() => {
     setSearchOpen(false);
     setSearchValue("");
-  }, [location.pathname]);
+  }, []);
+
+  useEffect(() => {
+    closeSearchHandler();
+  }, [location.pathname, closeSearchHandler]);
 
   return (
     <Toolbar className={classes.root}>
@@ -86,7 +90,7 @@ function AppBar() {
               className={classes.lastButton}
               color="inherit"
               aria-label="close search"
-              onClick={() => setSearchOpen(false)}
+              onClick={closeSearchHandler}
             >
               <CloseIcon />
             </IconButton>
