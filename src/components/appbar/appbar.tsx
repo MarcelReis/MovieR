@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BaseAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
+import { useLocation } from "react-router-dom";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-import InputBase from "@material-ui/core/InputBase";
+
+import SearchList from "../searchList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,18 +36,28 @@ const useStyles = makeStyles((theme) => ({
 
 function AppBar() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const classes = useStyles();
 
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchOpen(false);
+    setSearchValue("");
+  }, [location.pathname]);
+
   return (
     <div className={classes.root}>
-      <BaseAppBar position="static">
+      <BaseAppBar position="fixed">
         <Toolbar>
           {searchOpen ? (
             <InputBase
               className={classes.searchInput}
               id="outlined-basic"
               placeholder="Search a movie"
+              value={searchValue}
+              onChange={({ target: { value } }) => setSearchValue(value)}
             />
           ) : (
             <>
@@ -85,6 +98,7 @@ function AppBar() {
             </IconButton>
           )}
         </Toolbar>
+        <SearchList open={searchOpen} searchString={searchValue} />
       </BaseAppBar>
     </div>
   );

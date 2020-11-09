@@ -1,14 +1,16 @@
 import React from "react";
 
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import AppBar from ".";
 
+import { renderWithRouter } from "../../config/test-utils";
+
 describe("The <Appbar />", () => {
   describe("When rendering by default", () => {
     it("Should render the title and interaction buttons", () => {
-      render(<AppBar />);
+      renderWithRouter(<AppBar />);
 
       expect(
         screen.getByRole("button", { name: /search/i })
@@ -24,7 +26,7 @@ describe("The <Appbar />", () => {
 
   describe("When clicking in the search button", () => {
     it("Should remove the default appbar", () => {
-      render(<AppBar />);
+      renderWithRouter(<AppBar />);
 
       userEvent.click(screen.getByRole("button", { name: /search/i }));
       expect(
