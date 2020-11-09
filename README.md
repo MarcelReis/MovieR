@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Before you go
+You nedd to have `yarn` installed, if you don't have please follow [this instructions](https://classic.yarnpkg.com/en/docs/install).
+
+Create a file called `.env`, then create a variable called `REACT_APP_RAKUTEN_API_KEY`. Set it's value to your api key that you can get in [Rakuten](https://english.api.rakuten.net/hmerritt/api/imdb-internet-movie-database-unofficial). Like `REACT_APP_RAKUTEN_API_KEY=my_super_secret_api_key`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
