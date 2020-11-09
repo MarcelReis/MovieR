@@ -77,7 +77,7 @@ const MoviePage = () => {
           </Box>
           <Box>
             <Typography component="p" variant="h6">
-              {movie.rating}
+              {movie.rating || "?"}
               <Typography variant="caption" color="textSecondary">
                 /10
               </Typography>
@@ -88,7 +88,7 @@ const MoviePage = () => {
               color="textSecondary"
               align="center"
             >
-              {movie.rating_votes}
+              {movie.rating_votes || "0"}
             </Typography>
           </Box>
         </Box>
