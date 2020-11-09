@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
 import { makeStyles } from "@material-ui/core/styles";
+
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -16,6 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 
 import CreateIcon from "@material-ui/icons/Create";
+import StarIcon from "@material-ui/icons/Star";
 
 import imdbAPI from "../../api";
 import { Movie } from "../../api/types";
@@ -44,15 +45,41 @@ const MoviePage = () => {
 
   return (
     <div>
-      <Typography component={"h1"} variant="h6">
-        {movie.title}
-      </Typography>
+      <Box display="flex" justifyContent="space-between" paddingY=".5rem">
+        <Box display="flex" alignContent="center">
+          <Typography component={"h1"} variant="h5">
+            {movie.title}
+          </Typography>
+        </Box>
+
+        <Box display="flex" alignItems="center">
+          <Box paddingRight="0.75rem">
+            <StarIcon color="primary" />
+          </Box>
+          <Box>
+            <Typography component="p" variant="h6">
+              {movie.rating}
+              <Typography variant="caption" color="textSecondary">
+                /10
+              </Typography>
+            </Typography>
+            <Typography
+              component="p"
+              variant="caption"
+              color="textSecondary"
+              align="center"
+            >
+              {movie.rating_votes}
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <img src={movie.poster} width="100%" alt="" />
         </Grid>
         <Grid item xs={8}>
-          <Typography variant="body1" color="textSecondary">
+          <Typography variant="body1" color="textPrimary">
             {movie.plot}
           </Typography>
         </Grid>
