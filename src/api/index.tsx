@@ -25,7 +25,7 @@ class IMDB_API {
 
   public async getMovie(movieID: string): Promise<Movie | null> {
     try {
-      const res = await fetch(`${this.URL}/filme/${encodeURI(movieID)}`, {
+      const res = await fetch(`${this.URL}/film/${encodeURI(movieID)}`, {
         headers: this.Headers,
       });
 
