@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -61,6 +61,7 @@ function AppBar() {
         <Toolbar>
           {searchOpen ? (
             <InputBase
+              autoFocus
               className={classes.searchInput}
               id="outlined-basic"
               placeholder="Search a movie"
